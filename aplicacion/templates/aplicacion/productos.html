@@ -1,0 +1,33 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Productos
+{% endblock titulo %}
+
+{% block contenido %}
+    <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="{% url 'agregarProducto' %}">Agregar producto</a></div>
+    <br>
+    <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="{% url 'busquedaProducto' %}">Buscar productos</a></div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Uso</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos  %}
+                    <tr>
+                        <td>{{ producto.id }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.marca }}</td>
+                        <td>{{ producto.uso }}</td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}

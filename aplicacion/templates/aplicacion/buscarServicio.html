@@ -1,0 +1,15 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Buscar servicios
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <form action="/buscarServicio" method="get">
+        {% csrf_token %}
+        <p>Patrón de búsqueda: <input type="text" name="buscar" id="buscar"></p>
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock contenido %}

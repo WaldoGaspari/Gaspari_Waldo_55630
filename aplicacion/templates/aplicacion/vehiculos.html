@@ -1,0 +1,32 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Vehículos
+{% endblock titulo %}
+
+{% block contenido %}
+    <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="{% url 'agregarVehiculo' %}">Agregar vehículo</a></div>
+    <br>
+    <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="{% url 'busquedaVehiculo' %}">Buscar vehiculos</a></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in vehiculos  %}
+                    <tr>
+                        <td>{{ vehiculo.id }}</td>
+                        <td>{{ vehiculo.marca }}</td>
+                        <td>{{ vehiculo.modelo }}</td>
+                        <td>{{ vehiculo.tipo }}</td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
