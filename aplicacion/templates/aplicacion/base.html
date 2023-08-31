@@ -29,9 +29,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'home' %}">Página principal</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'servicios' %}">Servicios</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'vehiculos' %}">Vehículos</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'productos' %}">Productos</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'servicios' %}">Servicios</a></li>
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'vehiculos' %}">Vehículos</a></li>
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'productos' %}">Productos</a></li>
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a></li>
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'registro' %}">Registro</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
