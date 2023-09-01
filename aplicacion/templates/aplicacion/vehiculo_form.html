@@ -1,13 +1,14 @@
-{% extends 'aplicacion/base.html' %}
-{% load static %}
+{% extends 'aplicacion/base.html' %} 
+{% load static %} 
 
 {% block titulo %}
-    Agregar un servicio
-{% endblock titulo %}
+    
+{% endblock titulo %} 
 
 {% block contenido %}
-    <form action="" method="post">
-        {% csrf_token %}
+    <h2>Vehiculo</h2>
+    <form action="" method="POST">
+        {% csrf_token %} 
         <table>
             {{ form.as_table }}
         </table>

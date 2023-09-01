@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 
 
 def home(request):
@@ -25,93 +30,6 @@ def vehiculos(request):
 def productos(request):
     contexto = {'productos': Producto.objects.all()}
     return render(request, "aplicacion/productos.html", contexto)
-
-@login_required
-def agregarServicio(request):
-    if request.method == "POST":
-        formulario = FormularioServicio(request.POST)
-        if formulario.is_valid():
-            servicio_nombre = formulario.cleaned_data.get('nombre')
-            servicio_tipo = formulario.cleaned_data.get('tipo')
-            servicio_descripcion = formulario.cleaned_data.get('descripcion')
-            servicio = Servicio(nombre=servicio_nombre, tipo=servicio_tipo, descripcion=servicio_descripcion)
-            servicio.save()
-            return render(request, "aplicacion/servicios.html", {'servicios': Servicio.objects.all()})
-    else:
-        formulario = FormularioServicio()
-    
-    return render(request, "aplicacion/agregarServicio.html", {"form": formulario })
-
-@login_required
-def agregarVehiculo(request):
-    if request.method == "POST":
-        formulario = FormularioVehiculo(request.POST)
-        if formulario.is_valid():
-            vehiculo_marca = formulario.cleaned_data.get('marca')
-            vehiculo_modelo = formulario.cleaned_data.get('modelo')
-            vehiculo_tipo = formulario.cleaned_data.get('tipo')
-            vehiculo = Vehiculo(marca=vehiculo_marca, modelo=vehiculo_modelo, tipo=vehiculo_tipo)
-            vehiculo.save()
-            return render(request, "aplicacion/vehiculos.html", {'vehiculos': Vehiculo.objects.all()})
-    else:
-        formulario = FormularioVehiculo()
-    
-    return render(request, "aplicacion/agregarVehiculo.html", {"form": formulario })
-
-@login_required
-def agregarProducto(request):
-    if request.method == "POST":
-        formulario = FormularioProducto(request.POST)
-        if formulario.is_valid():
-            producto_nombre = formulario.cleaned_data.get('nombre')
-            producto_marca = formulario.cleaned_data.get('marca')
-            producto_uso = formulario.cleaned_data.get('uso')
-            producto = Producto(nombre=producto_nombre, marca=producto_marca, uso=producto_uso)
-            producto.save()
-            return render(request, "aplicacion/productos.html", {'productos': Producto.objects.all()})
-    else:
-        formulario = FormularioProducto()
-    
-    return render(request, "aplicacion/agregarProducto.html", {"form": formulario })
-
-@login_required
-def busquedaServicio(request):
-    return render(request, "aplicacion/buscarServicio.html")
-
-@login_required
-def buscarServicio(request):
-    if request.GET['buscar']:
-        patron = request.GET['buscar']
-        servicios = Servicio.objects.filter(nombre__icontains=patron)
-        contexto = {"servicios": servicios, 'titulo': f'Patrón de búsqueda:"{patron}"'}
-        return render(request, "aplicacion/servicios.html", contexto)
-    return HttpResponse("No se ingresó nada para buscar.")
-
-@login_required
-def busquedaVehiculo(request):
-    return render(request, "aplicacion/buscarVehiculo.html")
-
-@login_required
-def buscarVehiculo(request):
-    if request.GET['buscar']:
-        patron = request.GET['buscar']
-        vehiculos = Vehiculo.objects.filter(nombre__icontains=patron)
-        contexto = {"vehiculos": vehiculos, 'titulo': f'Patrón de búsqueda:"{patron}"'}
-        return render(request, "aplicacion/vehiculos.html", contexto)
-    return HttpResponse("No se ingresó nada para buscar.")
-
-@login_required
-def busquedaProducto(request):
-    return render(request, "aplicacion/buscarProducto.html")
-
-@login_required
-def buscarProducto(request):
-    if request.GET['buscar']:
-        patron = request.GET['buscar']
-        productos = Producto.objects.filter(nombre__icontains=patron)
-        contexto = {"productos": productos, 'titulo': f'Patrón de búsqueda:"{patron}"'}
-        return render(request, "aplicacion/productos.html", contexto)
-    return HttpResponse("No se ingresó nada para buscar.")
 
 def loguearse(request):
     if request.method == "POST":
@@ -142,3 +60,54 @@ def registrarse(request):
     else:
         miForm =   RegistroUsuariosForm()      
     return render(request, "aplicacion/registro.html", {"form":miForm})
+
+class ServicioList(ListView):
+    model = Servicio
+
+class ServicioCreate(CreateView):
+    model = Servicio
+    fields = ['nombre', 'tipo', 'descripcion']
+    success_url = reverse_lazy('servicios')
+
+class ServicioUpdate(UpdateView):
+    model = Servicio
+    fields = ['nombre', 'tipo', 'descripcion']
+    success_url = reverse_lazy('servicios')
+
+class ServicioDelete(DeleteView):
+    model = Servicio
+    success_url = reverse_lazy('servicios')
+
+class VehiculoList(ListView):
+    model = Vehiculo
+
+class VehiculoCreate(CreateView):
+    model = Vehiculo
+    fields = ['marca', 'modelo', 'tipo']
+    success_url = reverse_lazy('vehiculos')
+
+class VehiculoUpdate(UpdateView):
+    model = Vehiculo
+    fields = ['marca', 'modelo', 'tipo']
+    success_url = reverse_lazy('vehiculos')
+
+class VehiculoDelete(DeleteView):
+    model = Vehiculo
+    success_url = reverse_lazy('vehiculos')
+
+class ProductoList(ListView):
+    model = Producto
+
+class ProductoCreate(CreateView):
+    model = Producto
+    fields = ['nombre', 'marca', 'uso']
+    success_url = reverse_lazy('productos')
+
+class ProductoUpdate(UpdateView):
+    model = Producto
+    fields = ['nombre', 'marca', 'uso']
+    success_url = reverse_lazy('productos')
+
+class ProductoDelete(DeleteView):
+    model = Producto
+    success_url = reverse_lazy('productos')
