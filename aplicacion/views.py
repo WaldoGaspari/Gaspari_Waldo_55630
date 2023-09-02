@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
@@ -40,6 +41,12 @@ def loguearse(request):
             user = authenticate(username=usuario, password=password)
             if user is not None:
                 login(request, user)
+                try:
+                    avatar = Avatar.objects.get(user=request.user.id).imagen.url
+                except:
+                    avatar = "/media/avatares/default.png"
+                finally:
+                    request.session["avatar"] = avatar
                 return render(request, "aplicacion/base.html", {'mensaje': f'Bienvenido al sitio {usuario}!'})
             else:
                 return render(request, "aplicacion/login.html", {'form': miForm, 'mensaje': f'Los datos son inválidos.'})
@@ -111,3 +118,41 @@ class ProductoUpdate(UpdateView):
 class ProductoDelete(DeleteView):
     model = Producto
     success_url = reverse_lazy('productos')
+
+@login_required
+def editarUsuario(request):
+    usuario = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            usuario.email = form.cleaned_data.get('email')
+            usuario.password1 = form.cleaned_data.get('password1')
+            usuario.password2 = form.cleaned_data.get('password2')
+            usuario.first_name = form.cleaned_data.get('first_name')
+            usuario.last_name = form.cleaned_data.get('last_name')
+            usuario.save()
+            return render(request,"aplicacion/base.html")
+        else:
+            return render(request,"aplicacion/editar_usuario.html", {'form': form, 'usuario': usuario.username})
+    else:
+        form = UserEditForm(instance=usuario)
+    return render(request, "aplicacion/editar_usuario.html", {'form': form, 'usuario': usuario.username})
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
+            usuario = User.objects.get(username=request.user)
+            avatarAnterior = Avatar.objects.filter(user=usuario)
+            if len(avatarAnterior) > 0:
+                for posicion in range(len(avatarAnterior)):
+                    avatarAnterior[posicion].delete()
+            avatar = Avatar(user=usuario, imagen=form.cleaned_data['imagen'])
+            avatar.save()
+            imagen = Avatar.objects.get(user=request.user.id).imagen.url
+            request.session["avatar"] = imagen
+            return render(request,"aplicacion/base.html")
+    else:
+        form = AvatarFormulario()
+    return render(request, "aplicacion/agregar_avatar.html", {'form': form })

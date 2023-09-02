@@ -35,6 +35,17 @@
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'servicios' %}">Servicios</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'vehiculos' %}">Vehículos</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'productos' %}">Productos</a></li>
+                            <p>Hola {{user.username}}! Bienvenido!!!</p>
+                            <div class="text-center">
+                                <img src="{{ request.session.avatar }}" height="40px" weight="40px"/>
+                                <a
+                                    href="{% url 'agregar_avatar' %}"
+                                    class="btn btn-primary"
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                    ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                                </a>
+                            </div>
+                            <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'editar_usuario' %}">Editar usuario</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a></li>

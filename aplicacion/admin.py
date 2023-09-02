@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Servicio)
 admin.site.register(Producto)
 admin.site.register(Vehiculo)
+admin.site.register(Avatar)
