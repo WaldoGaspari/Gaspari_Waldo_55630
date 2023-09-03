@@ -17,6 +17,9 @@ from django.views.generic import DeleteView
 def home(request):
     return render(request, "aplicacion/inicio.html")
 
+def acercaDe(request):
+    return render(request, "aplicacion/acerca_de_mi.html")
+
 @login_required
 def servicios(request):
     contexto = {'servicios': Servicio.objects.all()}

@@ -1,0 +1,36 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Acerca de mi
+{% endblock titulo %}
+
+{% block contenido %}
+    <section>
+        <div class="container">
+            <div class="intro">
+                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">Sobre mi</span>
+                    </h2>
+                    <p class="mb-3">Mi nombre es Waldo Gaspari y soy Analista de Sistemas. Estoy terminando los estudios para poder recibirme de Ingeniero en Sistemas. Estudio en la Universidad Nacional de Tres de Febrero (UNTREF).</p>
+                    <p class="mb-3">Desde adolescente me interesó el mundo de la tecnología e innovación por eso decidí seguir por ese rumbo. He realizado cursos de programación aparte ya que me interesa mucho este campo, eso me lleva a conocer varios lenguajes de programación.</p>
+                    <p class="mb-3">En esta oportunidad, me decidí por realizar este proyecto de Estética Automotriz que en estos últimos años esta creciendo mucho. Es una página de estilo Wiki para no solo conocer sobre este rubro sino también poder aportar todo tipo de conocimiento sobre el tema y asi generar una gran comunidad. </p>
+                    <p class="mb-3">Si quieren conocer más sobre mi dejo a continuación los links a mi Linkedin y a mi Github:</p>
+                    <a
+                        href="https://www.linkedin.com/in/waldo-ezequiel-gaspari"
+                        class="btn btn-primary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1.75rem;"
+                        ><i class="fa-brands fa-linkedin" title="Linkedin"></i>
+                    </a>
+                    <a
+                        href="https://github.com/WaldoGaspari"
+                        class="btn btn-primary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1.75rem;"
+                        ><i class="fa-brands fa-github" title="Github"></i>
+                    </a>
+                </div>
+        </div>
+    </section>
+    
+{% endblock contenido %}

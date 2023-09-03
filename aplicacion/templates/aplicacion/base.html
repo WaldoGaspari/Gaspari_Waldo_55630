@@ -35,7 +35,7 @@
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'servicios' %}">Servicios</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'vehiculos' %}">Vehículos</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'productos' %}">Productos</a></li>
-                            <p>Hola {{user.username}}! Bienvenido!!!</p>
+                            <p>Hola {{user.username}}!</p>
                             <div class="text-center">
                                 <img src="{{ request.session.avatar }}" height="40px" weight="40px"/>
                                 <a
@@ -50,7 +50,9 @@
                         {% else %}
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a></li>
                             <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'registro' %}">Registro</a></li>
+                            
                         {% endif %}
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{% url 'acerca_de' %}">Acerca de mí</a></li>
                     </ul>
                 </div>
             </div>
