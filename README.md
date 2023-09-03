@@ -1,12 +1,12 @@
-## Proyecto Final - Curso Python - Coderhouse
+# Proyecto Final - Curso Python - Coderhouse
 
-# Alumno: Gaspari Waldo
+## Alumno: Gaspari Waldo
 
-# Comisión: 55630
+## Comisión: 55630
 
-# Nombre del proyecto: Wiki: Estética vehicular
+## Nombre del proyecto: Wiki: Estética vehicular
 
-# Desarrollo:
+## Desarrollo:
 
 - Objetivo: Se trata de una Wiki relacionada a la estética vehicular, tarea que hoy en día esta creciendo mucho por los productos que se usan y por el acabado final que se logra en los vehículos.
 Con esta página, se intenta dar a conocer de qué trata esto y de cómo se compone, dejando que cada usuario que ingrese a la página pueda también aportar alguna información relevante sobre este tema. 
@@ -19,17 +19,17 @@ Por último, si el usuario lo desea puede cerrar su sesión desde "Loguot".
 
 - Modelos: los modelos descritos anteriormente se componen de los siguientes atributos:
 
-* Servicio: nombre
-            tipo
-            descripcion
-* Vehículo: marca
-            modelo
-            tipo
-* Producto: nombre
-            marca
-            uso
+* Servicio: - nombre
+            - tipo
+            - descripcion
+* Vehículo: - marca
+            - modelo
+            - tipo
+* Producto: - nombre
+            - marca
+            - uso
 
-# Superusuario o usuario administrador:
+## Superusuario o usuario administrador:
 
 - Usuario: Waldo
 - Contraseña: Python2023
