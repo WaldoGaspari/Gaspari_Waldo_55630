@@ -23,7 +23,7 @@ class Producto(models.Model):
 
     nombre = models.CharField(max_length=30)
     marca = models.CharField(max_length=30)
-    uso = models.CharField(max_length=60)
+    uso = models.CharField(max_length=200)
 
     def __str__(self):
         return f"Producto: {self.nombre}, Marca: {self.marca}"
